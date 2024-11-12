@@ -1,1 +1,4 @@
 test.js
+codeVerifier.txt
+node_modules
+.env
