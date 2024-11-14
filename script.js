@@ -40,4 +40,10 @@ async function getAccessToken() {
 // Token usage
 getAccessToken().then((token) => {
     // Now you can use the token to make requests to the Spotify API
+    auth_code = process.env.AUTH_CODE
+    const res = axios.get('https://api.spotify.com/v1/me', {
+        headers: {
+          Authorization: `Bearer ${auth_code}`,  // Set the access token in the request header
+        },
+      });
 });

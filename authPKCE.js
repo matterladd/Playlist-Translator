@@ -1,6 +1,7 @@
 // https://developer.spotify.com/documentation/web-api/tutorials/code-pkce-flow
 // running with Node, so some things have to change slightly
 
+const axios = require('axios');
 const crypto = require('crypto');
 const fs = require('fs')
 
@@ -37,15 +38,18 @@ console.log("codeChallenge: " + codeChallenge);
 
 // ---------------- request user authorization ------------------
 const clientId = 'c1f19dc224044c358df6ec4334d73353';
-const redirectUri = 'http://localhost:8080';
+const redirectUri = 'http://localhost';
 
 const scope = 'user-read-private user-read-email';
-const authUrl = new URL("https://accounts.spotify.com/authorize")
+const authorizationUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scope)}`;
 
+console.log("Visit this URL to authorize the app:");
+console.log(authorizationUrl);
+
+/*
 // generated in the previous step
 const filePath = 'codeVerifier.txt';
 fs.writeFileSync(filePath, codeVerifier);
-
 const params =  {
   response_type: 'code',
   client_id: clientId,
@@ -57,4 +61,5 @@ const params =  {
 
 authUrl.search = new URLSearchParams(params).toString();
 console.log(authUrl.toString());
+*/
 
